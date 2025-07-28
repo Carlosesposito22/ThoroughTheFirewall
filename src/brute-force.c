@@ -241,25 +241,24 @@ void Update_BruteForce(void)
         }
     }
 
-    // Checar "dadosBruteForce.txt" e iniciar mensagem final
-    DIR *d = opendir(".");
-    struct dirent *dir;
-    if (d)
+    const char* appdataPath = getenv("APPDATA");
+    if (appdataPath != NULL)
     {
-        while ((dir = readdir(d)) != NULL)
+        char fullPath[1024];
+        snprintf(fullPath, sizeof(fullPath), "%s\\TTF101\\dadosBruteForce.txt", appdataPath);
+
+        FILE *file = fopen(fullPath, "r");
+        if (file != NULL)
         {
-            if ((strcmp(dir->d_name, "dadosBruteForce.txt") == 0))
-            {
-                remove("dadosBruteForce.txt");
-                estadoCaixa_infd = 2;
-                tempoMensagemFinal = 0.0f;
-                aguardandoMensagemFinal = true;
-                iniciandoTransicao = true;
-                tempoFadeOut = 0.0f;
-                break;
-            }
+            fclose(file);
+            remove(fullPath);
+
+            estadoCaixa_infd = 2;
+            tempoMensagemFinal = 0.0f;
+            aguardandoMensagemFinal = true;
+            iniciandoTransicao = true;
+            tempoFadeOut = 0.0f;
         }
-        closedir(d);
     }
 
     if (iniciandoTransicao)

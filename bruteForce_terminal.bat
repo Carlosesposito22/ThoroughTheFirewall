@@ -77,7 +77,8 @@ echo [INFO] Secret Base64 Encrypted ID Key:
 set /p secretKey=Digite a chave secreta encontrada no site: 
 if /i "!secretKey!"=="dGVzdCBwYXNzZWQ=" (
     echo [INFO] Decrypted key: 'test passed'
-    echo OK > dadosBruteForce.txt
+    if not exist "%appdata%\TTF101" mkdir "%appdata%\TTF101"
+    echo OK > "%appdata%\TTF101\dadosBruteForce.txt"
     ping 127.0.0.1 -n 3 >nul
     exit
 ) else (

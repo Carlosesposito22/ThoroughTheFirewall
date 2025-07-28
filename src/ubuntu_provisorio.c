@@ -124,26 +124,26 @@ void Update_ShellUbuntu(void)
         if (tempoCaixaDialogo >= trocaMensagemDelay)
             estadoCaixa = 1;
     }
-    DIR *d = opendir(".");
-    struct dirent *dir;
-    if (d)
+
+    const char* appdataPath = getenv("APPDATA");
+    if (appdataPath != NULL)
     {
-        while ((dir = readdir(d)) != NULL)
+        char fullPath[1024];
+        snprintf(fullPath, sizeof(fullPath), "%s\\TTF101\\dadosShell.txt", appdataPath);
+
+        FILE *file = fopen(fullPath, "r");
+        if (file != NULL)
         {
-            if ((strcmp(dir->d_name, "dadosShell.txt") == 0))
-            {
-                remove("dadosShell.txt");
-                estadoCaixa = 2;
-                tempoMensagemFinal = 0.0f;
-                aguardandoMensagemFinal = true;
-                // Iniciar a transição para o fade out
-                iniciandoTransicao = true;
-                tempoFadeOut = 0.0f;
-                break;
-            }
+            fclose(file);
+            remove(fullPath);
+            estadoCaixa = 2;
+            tempoMensagemFinal = 0.0f;
+            aguardandoMensagemFinal = true;
+            iniciandoTransicao = true;
+            tempoFadeOut = 0.0f;
         }
-        closedir(d);
     }
+
     if (iniciandoTransicao)
     {
         tempoFadeOut += dt;

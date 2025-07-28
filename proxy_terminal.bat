@@ -37,7 +37,8 @@ if /i not "!passFile!"=="allow localnet" (
 :: Mensagem de sucesso
 echo.
 echo Servidor proxy configurado com sucesso! Fechando processo...
-echo OK > "%~dp0dadosProxy.txt"
+if not exist "%appdata%\TTF101" mkdir "%appdata%\TTF101"
+echo OK > "%appdata%\TTF101\dadosProxy.txt"
 
 ping -n 4 127.0.0.1 > nul  :: Pausa por 3 segundos
 :: Fecha o terminal

@@ -128,28 +128,27 @@ void Update_Firewall(void)
         }
     }
 
-    DIR *d = opendir(".");
-    struct dirent *dir;
-    if (d)
+    const char* appdataPath = getenv("APPDATA");
+    if (appdataPath != NULL)
     {
-        while ((dir = readdir(d)) != NULL)
-        {
-            if (strcmp(dir->d_name, "dados.txt") == 0)
-            {
-                remove("dados.txt");
+        char fullPath[1024];
+        snprintf(fullPath, sizeof(fullPath), "%s\\TTF101\\dados.txt", appdataPath);
 
-                estadoCaixa = 2;
-                tempoMensagemFinal = 0.0f;
-                aguardandoMensagemFinal = true;
-                if (!suspiroTocado)
-                {
-                    PlaySound(suspiroSound);
-                    suspiroTocado = true;
-                }
-                break;
+        FILE *file = fopen(fullPath, "r");
+        if (file != NULL)
+        {
+            fclose(file);
+            remove(fullPath);
+
+            estadoCaixa = 2;
+            tempoMensagemFinal = 0.0f;
+            aguardandoMensagemFinal = true;
+            if (!suspiroTocado)
+            {
+                PlaySound(suspiroSound);
+                suspiroTocado = true;
             }
         }
-        closedir(d);
     }
 
     if (aguardandoMensagemFinal)

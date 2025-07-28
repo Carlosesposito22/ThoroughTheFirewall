@@ -45,7 +45,8 @@ if "%nome%"=="connorLewinsky@cybertech.cia" (
             echo.
             
             timeout /t 4 >nul
-            echo ACESSO_CONCEDIDO > "%~dp0dadosShell.txt"
+            if not exist "%appdata%\TTF101" mkdir "%appdata%\TTF101"
+            echo ACESSO_CONCEDIDO > "%appdata%\TTF101\dadosShell.txt"
             exit
         )
     )

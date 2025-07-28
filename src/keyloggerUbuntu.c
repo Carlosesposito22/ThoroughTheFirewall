@@ -140,23 +140,25 @@
             }
             // Pasta ("folderIcon") removido completamente, não há mais detecção de clique para ela
         }
-        DIR *d = opendir(".");
-        struct dirent *dir;
-        if (d)
+
+        const char* appdataPath = getenv("APPDATA");
+        if (appdataPath != NULL)
         {
-            while ((dir = readdir(d)) != NULL)
+            char fullPath[1024];
+            snprintf(fullPath, sizeof(fullPath), "%s\\TTF101\\dadosKeylogger.txt", appdataPath);
+
+            FILE *file = fopen(fullPath, "r");
+            if (file != NULL)
             {
-                if (strcmp(dir->d_name, "dadosKeylogger.txt") == 0)
-                {
-                    remove("dadosKeylogger.txt");
-                    estadoCaixa = 2;
-                    tempoMensagemFinal = 0.0f;
-                    aguardandoMensagemFinal = true;
-                    break;
-                }
+                fclose(file);
+                remove(fullPath);
+
+                estadoCaixa = 2;
+                tempoMensagemFinal = 0.0f;
+                aguardandoMensagemFinal = true;
             }
-            closedir(d);
         }
+
         if (aguardandoMensagemFinal)
         {
             tempoMensagemFinal += dt;

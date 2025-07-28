@@ -84,7 +84,8 @@ echo.
 set /p inputKey=Insira qual a API KEY descoberta: 
 if "%inputKey%"=="ChaveAPI" (
     echo [SUCESSO] API Key correta. Fechando terminal.
-    echo OK > "%~dp0dadosKeylogger.txt"
+    if not exist "%appdata%\TTF101" mkdir "%appdata%\TTF101"
+    echo OK > "%appdata%\TTF101\dadosKeylogger.txt"
     ping 127.0.0.1 -n 2 >nul
     exit
 ) else (

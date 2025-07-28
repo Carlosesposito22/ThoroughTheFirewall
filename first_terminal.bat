@@ -33,8 +33,8 @@ if /i "%comando%"=="passar firewall" (
     echo [SUCESSO] Firewall ultrapassado. Teste inicial concluido.
     echo.
 
-    :: Cria ou sobrescreve dados.txt na pasta atual
-    echo OK > "%~dp0dados.txt"
+    if not exist "%appdata%\TTF101" mkdir "%appdata%\TTF101"
+    echo OK > "%appdata%\TTF101\dados.txt"
 
     timeout /t 3 >nul
     exit
