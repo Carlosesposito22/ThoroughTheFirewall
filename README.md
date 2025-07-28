@@ -17,7 +17,7 @@ O jogador assume o papel de um candidato tentando ingressar na **Cybertech**, um
 
 ## 🪟 Instalação em Windows
 
-1. Baixe o instalador clicando no link: 👉 [**Instalador para Windows**](https://github.com/Carlosesposito22/ThoroughTheFirewall/releases/download/Game/Instalador.Jogo.TTF.exe)
+1. Baixe o instalador clicando no link: 👉 [**Instalador para Windows**](https://github.com/Carlosesposito22/ThoroughTheFirewall/releases/download/Bug/Instalador_Jogo_TTF.exe)
 
 2. Abra o instalador e siga as instruções para concluir a instalação.
 
